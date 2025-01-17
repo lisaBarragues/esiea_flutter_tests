@@ -5,6 +5,10 @@ void main() {
   group('Testing App Provider', () {
     Favorites favorites = Favorites();
 
+    setUp(() {
+      favorites = Favorites();
+    });
+
     test('A new item should be added', () {
       int number = 35;
       favorites.add(number);
@@ -17,6 +21,18 @@ void main() {
       expect(favorites.items.contains(number), true);
       favorites.remove(number);
       expect(favorites.items.contains(number), false);
+    });
+
+    test('An item should be removed', () {
+      int number = 45;
+      favorites.add(number);
+      favorites.add(number);
+      expect(favorites.items.contains(number), true);
+
+      expect(
+        favorites.items.where((item) => item == number).length,
+        1,
+      );
     });
   });
 }
